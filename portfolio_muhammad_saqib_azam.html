@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Saqib Azam — Data Engineer & Python Developer</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --primary:#1F4E79;
+    --accent:#2E75B6;
+    --light-bg:#F8FAFC;
+    --card-bg:#FFFFFF;
+    --text:#1A2A3A;
+    --muted:#5A6A7A;
+    --border:#E0E8F0;
+    --tag-bg:#EBF3FB;
+    --tag-text:#1F4E79;
+  }
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--light-bg);color:var(--text);line-height:1.6;font-size:16px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* NAV */
+  nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav-logo{font-weight:700;font-size:1.05rem;color:var(--primary)}
+  .nav-links{display:flex;gap:1.5rem}
+  .nav-links a{font-size:0.9rem;color:var(--muted);font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--primary);text-decoration:none}
+
+  /* SECTIONS */
+  section{padding:5rem 2rem}
+  .container{max-width:1100px;margin:0 auto}
+  h2.section-title{font-size:1.75rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem}
+  .section-line{width:48px;height:3px;background:var(--accent);border-radius:2px;margin-bottom:2.5rem}
+
+  /* HERO */
+  #hero{background:linear-gradient(135deg,#1F4E79 0%,#2E75B6 100%);color:#fff;padding:6rem 2rem}
+  .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:0.8rem;padding:4px 14px;border-radius:20px;margin-bottom:1rem;letter-spacing:0.5px}
+  .hero-name{font-size:2.8rem;font-weight:800;line-height:1.15;margin-bottom:0.75rem}
+  .hero-role{font-size:1.2rem;color:rgba(255,255,255,0.85);margin-bottom:1.25rem}
+  .hero-desc{font-size:1rem;color:rgba(255,255,255,0.75);max-width:520px;line-height:1.7;margin-bottom:2rem}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:#fff;color:var(--primary);font-weight:600;font-size:0.9rem;padding:10px 24px;border-radius:6px;transition:transform .2s,box-shadow .2s}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.15);text-decoration:none}
+  .btn-outline{border:1.5px solid rgba(255,255,255,0.5);color:#fff;font-weight:600;font-size:0.9rem;padding:10px 24px;border-radius:6px;transition:background .2s}
+  .btn-outline:hover{background:rgba(255,255,255,0.1);text-decoration:none}
+  .hero-stats{display:flex;flex-direction:column;gap:1rem}
+  .stat-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:1.25rem 1.5rem;text-align:center;min-width:130px}
+  .stat-num{font-size:2rem;font-weight:800;color:#fff}
+  .stat-label{font-size:0.78rem;color:rgba(255,255,255,0.7);margin-top:2px}
+
+  /* ABOUT */
+  #about{background:#fff}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  .about-text p{color:var(--muted);margin-bottom:1rem;line-height:1.75}
+  .about-highlights{display:flex;flex-direction:column;gap:0.75rem}
+  .highlight-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:var(--light-bg);border-radius:8px;border-left:3px solid var(--accent)}
+  .highlight-item span{font-size:0.9rem;color:var(--text);font-weight:500}
+
+  /* SKILLS */
+  #skills{background:var(--light-bg)}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+  .skill-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+  .skill-card-title{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+  .skill-icon{width:32px;height:32px;background:var(--tag-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{background:var(--tag-bg);color:var(--tag-text);font-size:0.78rem;font-weight:600;padding:4px 10px;border-radius:20px}
+
+  /* PROJECTS */
+  #projects{background:#fff}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
+  .project-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:box-shadow .2s,transform .2s}
+  .project-card:hover{box-shadow:0 4px 20px rgba(31,78,121,0.1);transform:translateY(-2px)}
+  .project-badge{display:inline-block;background:var(--tag-bg);color:var(--tag-text);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:0.75rem;letter-spacing:0.3px}
+  .project-title{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem}
+  .project-desc{font-size:0.875rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+  .project-meta{display:flex;gap:0.5rem;flex-wrap:wrap}
+  .project-tag{background:#EBF3FB;color:var(--primary);font-size:0.72rem;font-weight:600;padding:3px 8px;border-radius:4px}
+  .project-highlight{border-left:3px solid var(--accent);background:linear-gradient(135deg,#F0F6FC 0%,#fff 100%)}
+
+  /* EXPERIENCE */
+  #experience{background:var(--light-bg)}
+  .timeline{display:flex;flex-direction:column;gap:0}
+  .timeline-item{display:grid;grid-template-columns:140px 1fr;gap:0 2rem;padding-bottom:2rem;position:relative}
+  .timeline-item:not(:last-child)::before{content:'';position:absolute;left:140px;top:8px;bottom:0;width:2px;background:var(--border);margin-left:calc(-1px + 1.5rem)}
+  .timeline-dot{width:12px;height:12px;background:var(--accent);border-radius:50%;position:absolute;left:140px;top:6px;margin-left:calc(-6px + 1.5rem);z-index:1}
+  .timeline-date{font-size:0.8rem;color:var(--muted);font-weight:600;padding-top:4px;text-align:right}
+  .timeline-content{padding-left:0}
+  .timeline-role{font-size:1rem;font-weight:700;color:var(--primary)}
+  .timeline-org{font-size:0.875rem;color:var(--accent);margin-bottom:0.5rem}
+  .timeline-bullets{list-style:none;padding:0;margin:0}
+  .timeline-bullets li{font-size:0.875rem;color:var(--muted);padding:3px 0 3px 16px;position:relative;line-height:1.5}
+  .timeline-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700}
+
+  /* CERTIFICATIONS */
+  #certifications{background:#fff}
+  .certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+  .cert-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;padding:1.25rem;display:flex;align-items:flex-start;gap:0.75rem}
+  .cert-icon{width:36px;height:36px;background:var(--tag-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+  .cert-name{font-size:0.875rem;font-weight:700;color:var(--primary);margin-bottom:2px}
+  .cert-issuer{font-size:0.78rem;color:var(--muted)}
+
+  /* CONTACT */
+  #contact{background:linear-gradient(135deg,#1F4E79 0%,#2E75B6 100%);color:#fff}
+  .contact-inner{max-width:700px;margin:0 auto;text-align:center}
+  .contact-inner h2{font-size:2rem;font-weight:800;margin-bottom:0.75rem}
+  .contact-inner p{color:rgba(255,255,255,0.8);margin-bottom:2rem}
+  .contact-links{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+  .contact-link{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:10px 20px;border-radius:8px;font-size:0.9rem;font-weight:500;transition:background .2s}
+  .contact-link:hover{background:rgba(255,255,255,0.2);text-decoration:none}
+
+  /* FOOTER */
+  footer{background:#0D2137;color:rgba(255,255,255,0.5);text-align:center;padding:1.5rem;font-size:0.8rem}
+
+  @media(max-width:768px){
+    .hero-inner{grid-template-columns:1fr}
+    .hero-stats{flex-direction:row;justify-content:center}
+    .hero-name{font-size:2rem}
+    .about-grid{grid-template-columns:1fr}
+    .timeline-item{grid-template-columns:1fr}
+    .timeline-item::before,.timeline-dot{display:none}
+    .timeline-date{text-align:left;margin-bottom:4px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Saqib Azam</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Available for Remote Opportunities</div>
+      <div class="hero-name">Muhammad Saqib Azam</div>
+      <div class="hero-role">Data Engineer & Senior Python Developer</div>
+      <div class="hero-desc">I build enterprise-grade data pipelines, ETL systems, and Python tools for mission-critical financial and banking environments. Currently leading the State Bank of Pakistan T24 Temenos Currency Management System migration.</div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">60M+</div>
+        <div class="stat-label">Rows Migrated</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10/10</div>
+        <div class="stat-label">ZATCA Scenarios</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About me</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a senior data engineer and Python developer based in Karachi, Pakistan, with 20+ years of experience delivering enterprise software for banking, microfinance, and regulatory-compliance environments.</p>
+        <p>My current focus is data engineering — designing and building Python ETL pipelines, data extraction tools, and Oracle database platforms for production-critical financial systems. I developed custom Python tools to extract data directly from the T24 Temenos JBase system, convert to CSV, and load into Oracle — handling the full JBase → CSV → Oracle pipeline for the State Bank of Pakistan's Currency Management System migration.</p>
+        <p>I also deliver regulatory compliance systems (ZATCA Phase 2, FBR e-invoicing), Power BI analytics, and full-stack .NET/Python applications for enterprise and fintech clients.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item"><span>🏦 State Bank of Pakistan — T24 CMS Migration Lead</span></div>
+        <div class="highlight-item"><span>🇸🇦 ZATCA Phase 2 — 10/10 scenarios PASS, PCSID issued</span></div>
+        <div class="highlight-item"><span>🐍 Python ETL — JBase extraction to Oracle pipelines</span></div>
+        <div class="highlight-item"><span>📊 Power BI Developer — Executive dashboards & KPIs</span></div>
+        <div class="highlight-item"><span>🔒 ISO 27001 Lead Implementer & Auditor</span></div>
+        <div class="highlight-item"><span>🤖 AI-assisted development — Claude AI, GitHub Copilot</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Technical skills</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title"><div class="skill-icon">🐍</div>Python & Data Engineering</div>
+        <div class="tags">
+          <span class="tag">Python (Advanced)</span><span class="tag">Pandas</span><span class="tag">python-oracledb</span>
+          <span class="tag">ETL Pipeline Design</span><span class="tag">JBase Extraction</span><span class="tag">CSV Processing</span>
+          <span class="tag">Multithreading</span><span class="tag">Data Validation</span><span class="tag">PyInstaller</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><div class="skill-icon">🗄️</div>Databases</div>
+        <div class="tags">
+          <span class="tag">Oracle 19c / 11g</span><span class="tag">SQL Server</span><span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">PL/SQL</span>
+          <span class="tag">T-SQL</span><span class="tag">Schema Design</span><span class="tag">Performance Tuning</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><div class="skill-icon">☁️</div>Oracle DBA</div>
+        <div class="tags">
+          <span class="tag">RMAN</span><span class="tag">DataPump</span><span class="tag">AWR / ADDM</span>
+          <span class="tag">Tablespace Architecture</span><span class="tag">Unified Auditing</span><span class="tag">Credential Governance</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><div class="skill-icon">⚙️</div>.NET & Backend</div>
+        <div class="tags">
+          <span class="tag">C# / .NET 8</span><span class="tag">ASP.NET Core</span><span class="tag">Entity Framework</span>
+          <span class="tag">REST API</span><span class="tag">Microservices</span><span class="tag">SOAP</span>
+          <span class="tag">Node.js</span><span class="tag">React.js</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><div class="skill-icon">📊</div>Business Intelligence</div>
+        <div class="tags">
+          <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span>
+          <span class="tag">Paginated Reports</span><span class="tag">Crystal Reports</span><span class="tag">RDLC</span>
+          <span class="tag">KPI Dashboards</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><div class="skill-icon">🤖</div>AI Tools & DevOps</div>
+        <div class="tags">
+          <span class="tag">Claude AI</span><span class="tag">GitHub Copilot</span><span class="tag">ChatGPT</span>
+          <span class="tag">Git / GitHub</span><span class="tag">Docker</span><span class="tag">CI/CD</span>
+          <span class="tag">PowerShell</span><span class="tag">Bash</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Key projects</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <div class="project-card project-highlight">
+        <div class="project-badge">🏦 FLAGSHIP PROJECT</div>
+        <div class="project-title">SBP T24 Temenos CMS Data Migration</div>
+        <div class="project-desc">Developed custom Python tools to extract data directly from the T24 Temenos JBase system, convert to CSV, and load into an Oracle database instance. Full JBase → CSV → Oracle pipeline for the State Bank of Pakistan's Currency Management System (~60M rows). Includes multithreaded data-quality profiler, formal documentation suite (DMS-SBP-001), and Oracle DBA management throughout.</div>
+        <div class="project-meta">
+          <span class="project-tag">Python</span><span class="project-tag">JBase Extraction</span><span class="project-tag">Oracle 19c</span>
+          <span class="project-tag">ETL Pipelines</span><span class="project-tag">~60M Rows</span><span class="project-tag">T24 Temenos</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">🇸🇦 SAUDI ARABIA</div>
+        <div class="project-title">ZATCA Phase 2 E-Invoicing Integration</div>
+        <div class="project-desc">Production .NET 8 (C#) middleware for Saudi Arabia's ZATCA Phase 2 e-invoicing mandate. Built from scratch — REST API integration, cryptographic signing (X.509/ECDSA), chain management, and async processing. 10/10 test scenarios PASS, PCSID issued on first submission.</div>
+        <div class="project-meta">
+          <span class="project-tag">C# / .NET 8</span><span class="project-tag">REST API</span><span class="project-tag">Cryptographic Signing</span>
+          <span class="project-tag">10/10 PASS</span><span class="project-tag">PCSID Issued</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">🇵🇰 PAKISTAN</div>
+        <div class="project-title">FBR Digital Invoice Integration</div>
+        <div class="project-desc">ASP.NET Core REST API backend integrating enterprise ERP with Pakistan's Federal Board of Revenue e-invoicing gateway. Automated tax-compliant digital invoice generation, authentication, data transformation, and compliant submission.</div>
+        <div class="project-meta">
+          <span class="project-tag">ASP.NET Core</span><span class="project-tag">REST API</span><span class="project-tag">ERP Integration</span><span class="project-tag">FBR Compliance</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">🔧 PYTHON TOOL</div>
+        <div class="project-title">Multithreaded Data-Quality Profiler</div>
+        <div class="project-desc">Custom Python tool profiling and validating source data quality across 60,000+ JBase source files before migration — identifying type mismatches, precision issues, multivalue field structures, and transformation risks. Packaged as a standalone PyInstaller executable.</div>
+        <div class="project-meta">
+          <span class="project-tag">Python</span><span class="project-tag">Multithreading</span><span class="project-tag">PyInstaller</span>
+          <span class="project-tag">Data Quality</span><span class="project-tag">60,000+ Files</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">💳 FINTECH</div>
+        <div class="project-title">KD100 CDM API Integration</div>
+        <div class="project-desc">Backend service integrating the KD100 Cash Deposit Machine API with enterprise ERP — automating transaction data exchange between CDM hardware and the ERP platform, with ingestion, validation, and status handling.</div>
+        <div class="project-meta">
+          <span class="project-tag">C# / .NET</span><span class="project-tag">API Integration</span><span class="project-tag">Hardware Integration</span><span class="project-tag">ERP</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">🏦 BANKING</div>
+        <div class="project-title">Payment Gateway Integrations</div>
+        <div class="project-desc">REST and SOAP API integrations with JazzCash, EasyPaisa, MobiCash, and DataCheck (CIB credit bureau) — automating microfinance recovery, collection, and credit verification workflows for a regulated financial organization.</div>
+        <div class="project-meta">
+          <span class="project-tag">JazzCash</span><span class="project-tag">EasyPaisa</span><span class="project-tag">MobiCash</span>
+          <span class="project-tag">DataCheck</span><span class="project-tag">REST / SOAP</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">📊 POWER BI</div>
+        <div class="project-title">SBP Migration Executive Dashboards</div>
+        <div class="project-desc">Real-time Power BI dashboards tracking the State Bank of Pakistan T24 CMS migration progress, data-quality KPIs, and phase completion — built on live Oracle data with DAX measures and interactive drill-through for senior stakeholders.</div>
+        <div class="project-meta">
+          <span class="project-tag">Power BI</span><span class="project-tag">DAX</span><span class="project-tag">Oracle</span><span class="project-tag">Real-time KPIs</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">🏗️ ERP</div>
+        <div class="project-title">Three-Generation ERP Modernization</div>
+        <div class="project-desc">Led a complete data and application modernization from legacy FoxPro microcredit platform → .NET & SQL Server → Oracle 11g ERP (Finance, HR, Payroll, Microcredit). Designed SOAP middleware bridging legacy and modern systems across each transition.</div>
+        <div class="project-meta">
+          <span class="project-tag">FoxPro → .NET → Oracle</span><span class="project-tag">Data Migration</span><span class="project-tag">SOAP</span><span class="project-tag">ERP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2025 – Present</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Senior Software Engineer & Power BI Developer</div>
+          <div class="timeline-org">House of Business Machines (Pvt.) Ltd. — Karachi</div>
+          <ul class="timeline-bullets">
+            <li>SBP T24 Temenos CMS migration — Python JBase extraction tools, CSV processing, Oracle 19c loading (~60M rows)</li>
+            <li>ZATCA Phase 2 — .NET 8 compliance middleware, 10/10 PASS, PCSID issued</li>
+            <li>FBR Digital Invoice, KD100 CDM API integrations</li>
+            <li>Power BI executive dashboards and real-time KPI reporting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2024 – Present</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">IT Consultant & Freelancer</div>
+          <div class="timeline-org">GSTechsys — Karachi</div>
+          <ul class="timeline-bullets">
+            <li>IT advisory for ERP, cloud, and financial system implementations</li>
+            <li>Data integration, secure infrastructure, and BI reporting solutions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Dec 2011 – Oct 2024</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Head of Information Technology</div>
+          <div class="timeline-org">OPRCT Microfinance Company & Orangi Pilot Project — Karachi</div>
+          <ul class="timeline-bullets">
+            <li>Directed IT strategy, digital transformation, and engineering for a multi-branch organization (13 years)</li>
+            <li>Oracle 11g ERP implementation — Finance, HR, Payroll, Microcredit modules</li>
+            <li>Payment gateway integrations: JazzCash, EasyPaisa, MobiCash, DataCheck</li>
+            <li>Cloud/data-center migration to PTCL Tier-3 (~15% uptime improvement)</li>
+            <li>Power BI dashboards, Crystal/RDLC reporting, and analytics training</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <h2 class="section-title">Education & certifications</h2>
+    <div class="section-line"></div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div><div class="cert-name">Master of Computer Science (MCS)</div><div class="cert-issuer">University of Karachi, 2015</div></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🔒</div>
+        <div><div class="cert-name">ISO 27001 / 27017 / 27018</div><div class="cert-issuer">Lead Implementer & Auditor — Al-Nafi</div></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🛡️</div>
+        <div><div class="cert-name">CISSP Training</div><div class="cert-issuer">Cyber Security Essentials — Al-Nafi</div></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🗄️</div>
+        <div><div class="cert-name">Oracle Advanced PL/SQL Developer</div><div class="cert-issuer">Technoed (Ora Tech), Karachi</div></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📊</div>
+        <div><div class="cert-name">Power BI Training Certification</div><div class="cert-issuer">Microsoft Power BI</div></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">💼</div>
+        <div><div class="cert-name">ERP Financial with SAP</div><div class="cert-issuer">IBA Karachi</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <h2>Let's work together</h2>
+      <p>Open to remote data engineering, Python development, and .NET opportunities worldwide. Based in Karachi, Pakistan.</p>
+      <div class="contact-links">
+        <a href="mailto:muhammedsaqibazam@gmail.com" class="contact-link">✉️ muhammedsaqibazam@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mohammed-saqib-azam-15b43a1a" target="_blank" class="contact-link">🔗 LinkedIn</a>
+        <a href="https://github.com/saqibazam" target="_blank" class="contact-link">💻 GitHub</a>
+        <a href="tel:+923202042890" class="contact-link">📞 +92 320 2042890</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Muhammad Saqib Azam — Data Engineer & Python Developer — Karachi, Pakistan</p>
+</footer>
+
+</body>
+</html>
